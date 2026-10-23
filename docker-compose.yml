@@ -1,0 +1,72 @@
+services:
+  server1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server1
+    hostname: server1
+    ports:
+      - "2201:22"
+    networks:
+      ansible_net:
+        ipv4_address: 172.28.0.11
+    restart: unless-stopped
+
+  server2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server2
+    hostname: server2
+    ports:
+      - "2202:22"
+    networks:
+      ansible_net:
+        ipv4_address: 172.28.0.12
+    restart: unless-stopped
+
+  server3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server3
+    hostname: server3
+    ports:
+      - "2203:22"
+    networks:
+      ansible_net:
+        ipv4_address: 172.28.0.13
+    restart: unless-stopped
+
+  server4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server4
+    hostname: server4
+    ports:
+      - "2204:22"
+    networks:
+      ansible_net:
+        ipv4_address: 172.28.0.14
+    restart: unless-stopped
+
+  server5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: server5
+    hostname: server5
+    ports:
+      - "2205:22"
+    networks:
+      ansible_net:
+        ipv4_address: 172.28.0.15
+    restart: unless-stopped
+
+networks:
+  ansible_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
