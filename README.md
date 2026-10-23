@@ -19,7 +19,7 @@ Proyecto de automatización de infraestructura como código (IaC) donde se despl
 * `ansible.cfg`: Configuración global que anula advertencias y desactiva la comprobación estricta de hosts SSH.
 * `inventario.ini`: Definición de los nodos administrados, puertos loopback y credenciales de acceso.
 * `playbook.yml`: Playbook con la secuencia de tareas declarativas.
-* `README.md`: Documentación del proyecto.
+* `README.md`: Documentación técnica del proyecto.
 
 ---
 
@@ -33,32 +33,43 @@ Proyecto de automatización de infraestructura como código (IaC) donde se despl
 
 ---
 
-## ⚙️ Pasos de ejecución
+## ⚙️ Guía de Ejecución
 
-1. **Construir y levantar la infraestructura contenerizada:**
-   ```bash
-   docker compose up --build -d
+### 1. Despliegue de contenedores (PowerShell / Windows)
+Construir la imagen base y levantar los 5 servidores en segundo plano:
+```powershell
+docker compose up --build -d
+```
 
-2.	Cargar la configuración de Ansible en WSL:
-    Bash
-    export ANSIBLE_CONFIG=./ansible.cfg
+### 2. Preparación del nodo de control (Terminal WSL)
+Acceder al directorio del proyecto y cargar el archivo de configuración de Ansible:
+```bash
+cd "/mnt/c/Users/franc/Desktop/Electiva 2/Practica8"
+export ANSIBLE_CONFIG=./ansible.cfg
+```
 
-3.	Validar la conectividad SSH hacia los 5 servidores:
-    Bash
-    ansible servidores -m ping
+### 3. Verificación de conectividad SSH
+Comprobar que el nodo de control alcance a los 5 servidores mediante el módulo ping:
+```bash
+ansible servidores -m ping
+```
 
-4.	Ejecutar el playbook de aprovisionamiento:
-    Bash
-    ansible-playbook playbook.yml
+### 4. Ejecución del aprovisionamiento
+Lanzar el playbook declarativo para aplicar todas las configuraciones en paralelo:
+```bash
+ansible-playbook playbook.yml
+```
 
-5.	Comprobar la configuración en un contenedor:
-    Bash
-    docker exec -it server1 /usr/games/cowsay "Automatizacion exitosa"
+### 5. Validación en un contenedor
+Comprobar que las tareas se hayan ejecutado exitosamente dentro de los nodos:
+```bash
+docker exec -it server1 /usr/games/cowsay "Automatización completada"
+docker exec -it server1 cat /app/hola.txt
+docker exec -it server1 id itla
+```
 
-    docker exec -it server1 cat /app/hola.txt
+---
 
-    docker exec -it server1 id itla
+## 👤 Autor
 
-👤 Autor
-•	Franciel Antonio Beltré Rodríguez
-
+* **Franciel Antonio Beltré Rodríguez**
